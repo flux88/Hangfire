@@ -19,6 +19,7 @@ using System;
 using System.Transactions;
 #else
 using System.Data;
+using System.Security.Principal;
 #endif
 
 namespace Hangfire.SqlServer
@@ -43,7 +44,10 @@ namespace Hangfire.SqlServer
             DashboardJobListLimit = 10000;
             _schemaName = Constants.DefaultSchema;
             TransactionTimeout = TimeSpan.FromMinutes(1);
+            WindowsIdentity = WindowsIdentity;
         }
+
+        public WindowsIdentity WindowsIdentity { get; set; }
 
         public IsolationLevel? TransactionIsolationLevel { get; set; }
 

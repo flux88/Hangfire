@@ -20,6 +20,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 #if NETFULL
 using System.Configuration;
@@ -243,7 +244,17 @@ namespace Hangfire.SqlServer
 
             if (connection.State == ConnectionState.Closed)
             {
-                connection.Open();
+                if (_options.WindowsIdentity != null)
+                {
+                    WindowsIdentity.RunImpersonated(_options.WindowsIdentity.AccessToken, () =>
+                    {
+                        connection.Open();
+                    });
+                }
+                else
+                {
+                    connection.Open();
+                }
             }
 
             return connection;

@@ -236,3 +236,6 @@ docs/_build
 #Jekyll site builds
 _site
 *.userprefs
+/src/Hangfire.AspNetCore/Hangfire.AspNetCore.NetStandard.nuget.props
+/src/Hangfire.Core/Hangfire.Core.NetStandard.nuget.props
+/src/Hangfire.SqlServer/Hangfire.SqlServer.NetStandard.nuget.props
